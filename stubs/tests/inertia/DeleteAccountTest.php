@@ -25,6 +25,12 @@ class DeleteAccountTest extends TestCase
             'password' => 'password',
         ]);
 
+        if (! $user->trashed()) {
+            $this->markTestSkipped('User model use softDeletes');
+
+            return;
+        }
+
         $this->assertNull($user->fresh());
     }
 
